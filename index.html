@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lz Glow Nails — Studio</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%238B5E5E'/%3E%3Crect x='10' y='7' width='12' height='18' rx='6' fill='%23F5ECE8'/%3E%3Crect x='12' y='9' width='8' height='14' rx='4' fill='%23C8A4A5' opacity='0.6'/%3E%3C/svg%3E">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Lz Glow <span>Nails</span></a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#testimonios">Reseñas</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Reservar cita</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">Nails</div>
+  <div class="hero-content reveal">
+    <span class="hero-tag">Studio de uñas · Desde 2025</span>
+    <h1 class="hero-title">Arte que vive<br>en tus <em>manos</em></h1>
+    <p class="hero-subtitle">Creamos diseños únicos que reflejan tu personalidad. Cada trazo, cada color, cada detalle — pensado solo para ti.</p>
+    <div class="hero-btns">
+      <a href="#contacto" class="btn-primary">Agendar cita</a>
+      <a href="#galeria" class="btn-secondary">Ver galería</a>
+    </div>
+  </div>
+  <div class="hero-visual reveal">
+    <div class="hero-card">
+      <div class="nail-art-grid">
+        <div class="nail n1"></div>
+        <div class="nail n2"></div>
+        <div class="nail n3"></div>
+        <div class="nail n4"></div>
+        <div class="nail n5"></div>
+        <div class="nail n6"></div>
+        <div class="nail n7"></div>
+        <div class="nail n8"></div>
+        <div class="nail n9"></div>
+        <div class="nail n10"></div>
+      </div>
+      <p class="hero-card-label">Paleta de la temporada · 2025</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="section-header reveal">
+    <span class="section-tag">Lo que ofrecemos</span>
+    <h2 class="section-title">Nuestros <em>servicios</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-icon">✦</span>
+      <h3 class="service-name">Semipermanente</h3>
+      <p class="service-desc">Esmalte de larga duración curado con lámpara UV/LED. Brillo impecable hasta 3 semanas sin astillarse.</p>
+      <span class="service-price">Desde $45.000</span>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">◆</span>
+      <h3 class="service-name">Acrílicas</h3>
+      <p class="service-desc">Extensiones resistentes en la forma que desees: oval, almendra, coffin, stiletto. Personalizadas 100%.</p>
+      <span class="service-price">Desde $80.000</span>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">❋</span>
+      <h3 class="service-name">Nail Art</h3>
+      <p class="service-desc">Diseños artísticos hechos a mano: florales, abstractos, geométricos, degradados y más. Cada uña es una obra.</p>
+      <span class="service-price">Desde $15.000 / uña</span>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">○</span>
+      <h3 class="service-name">Manicure Spa</h3>
+      <p class="service-desc">Ritual completo de cuidado: exfoliación, hidratación, masaje de manos y aplicación de color a elección.</p>
+      <span class="service-price">Desde $35.000</span>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">▲</span>
+      <h3 class="service-name">Gel Builder</h3>
+      <p class="service-desc">Sistema de construcción en gel para mayor resistencia y un acabado natural y elegante de larga duración.</p>
+      <span class="service-price">Desde $90.000</span>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">✿</span>
+      <h3 class="service-name">Retiro & Remoción</h3>
+      <p class="service-desc">Proceso seguro y sin daño para retirar acrílico, gel o semipermanente. Cuida la salud de tu uña natural.</p>
+      <span class="service-price">Desde $20.000</span>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="section-header reveal">
+    <span class="section-tag">Inspiración</span>
+    <h2 class="section-title">Nuestra <em>galería</em></h2>
+  </div>
+  <div class="gallery-filter reveal">
+    <button class="filter-btn active" data-filter="all">Todo</button>
+    <button class="filter-btn" data-filter="clasico">Clásico</button>
+    <button class="filter-btn" data-filter="nail-art">Nail Art</button>
+    <button class="filter-btn" data-filter="textura">Textura</button>
+    <button class="filter-btn" data-filter="minimalista">Minimalista</button>
+  </div>
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="gallery-item" data-cat="nail-art">
+      <div class="gallery-swatch g1">
+        <div class="nail-deco" style="gap:8px;">
+          <div class="nd" style="background:#F5C6C2;width:34px;height:58px;"></div>
+          <div class="nd" style="background:#D88888;width:30px;height:52px;"></div>
+          <div class="nd" style="background:#E8A0A0;width:32px;height:55px;"></div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-label">Rosa Ombré</span></div>
+    </div>
+    <div class="gallery-item" data-cat="clasico">
+      <div class="gallery-swatch g2">
+        <div class="nail-deco" style="gap:6px;">
+          <div class="nd" style="background:#E8D5C0;width:26px;height:44px;"></div>
+          <div class="nd" style="background:#C4A882;width:26px;height:44px;"></div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-label">Nude Dorado</span></div>
+    </div>
+    <div class="gallery-item" data-cat="minimalista">
+      <div class="gallery-swatch g3">
+        <div class="nail-deco" style="gap:6px;">
+          <div class="nd" style="background:#D4C5E0;width:26px;height:44px;"></div>
+          <div class="nd" style="background:#B89AD0;width:26px;height:44px;"></div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-label">Lavanda Suave</span></div>
+    </div>
+    <div class="gallery-item" data-cat="textura">
+      <div class="gallery-swatch g4">
+        <div class="nail-deco" style="gap:6px;">
+          <div class="nd" style="background:#3A2828;width:26px;height:44px;border:1px solid #8B6060;"></div>
+          <div class="nd" style="background:#2A2020;width:26px;height:44px;border:1px solid #6A4040;"></div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-label">Noir Chic</span></div>
+    </div>
+    <div class="gallery-item" data-cat="nail-art">
+      <div class="gallery-swatch g5">
+        <div class="nail-deco" style="gap:8px;">
+          <div class="nd" style="background:#C5D8C0;width:28px;height:48px;"></div>
+          <div class="nd" style="background:#A0C098;width:28px;height:48px;"></div>
+          <div class="nd" style="background:#88B080;width:28px;height:48px;"></div>
+          <div class="nd" style="background:#70A068;width:28px;height:48px;"></div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-label">Garden Verde</span></div>
+    </div>
+    <div class="gallery-item" data-cat="clasico">
+      <div class="gallery-swatch g6">
+        <div class="nail-deco" style="gap:6px;">
+          <div class="nd" style="background:#F9E4E4;width:26px;height:44px;"></div>
+          <div class="nd" style="background:#F0CCCC;width:26px;height:44px;"></div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-label">Rosa Bebé</span></div>
+    </div>
+    <div class="gallery-item" data-cat="textura">
+      <div class="gallery-swatch g7">
+        <div class="nail-deco" style="gap:6px;">
+          <div class="nd" style="background:#B5CDD8;width:26px;height:44px;"></div>
+          <div class="nd" style="background:#90B8C8;width:26px;height:44px;"></div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-label">Azul Glaciar</span></div>
+    </div>
+    <div class="gallery-item" data-cat="minimalista">
+      <div class="gallery-swatch g8">
+        <div class="nail-deco" style="gap:6px;">
+          <div class="nd" style="background:#D4B8CC;width:26px;height:44px;"></div>
+          <div class="nd" style="background:#B890A8;width:26px;height:44px;"></div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-label">Malva Sutil</span></div>
+    </div>
+    <div class="gallery-item" data-cat="nail-art">
+      <div class="gallery-swatch g9">
+        <div class="nail-deco" style="gap:6px;">
+          <div class="nd" style="background:#FAD4B8;width:26px;height:44px;"></div>
+          <div class="nd" style="background:#E8B898;width:26px;height:44px;"></div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-label">Terracota Glow</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CONTACTO & RESERVAS (MEJORADO)
+     ══════════════════════════════════ -->
+<section id="contacto">
+
+  <!-- Encabezado centrado -->
+  <div class="contacto-header reveal">
+    <span class="section-tag">Agenda tu visita</span>
+    <h2 class="section-title">Reserva tu <em>cita</em></h2>
+    <p class="contacto-intro">Escríbenos directamente o llena el formulario — te confirmamos en menos de 1 hora.</p>
+  </div>
+
+  <!-- Tarjetas de contacto rápido -->
+  <div class="contact-cards reveal">
+    <a href="https://wa.me/573215879755" target="_blank" class="contact-card contact-card--wa">
+      <div class="cc-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+      </div>
+      <div class="cc-info">
+        <span class="cc-label">WhatsApp</span>
+        <span class="cc-value">+57 321 587 9755</span>
+      </div>
+      <span class="cc-arrow">→</span>
+    </a>
+    <a href="https://instagram.com/lzglownails" target="_blank" class="contact-card contact-card--ig">
+      <div class="cc-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="cc-info">
+        <span class="cc-label">Instagram</span>
+        <span class="cc-value">@lzglownails</span>
+      </div>
+      <span class="cc-arrow">→</span>
+    </a>
+    <div class="contact-card contact-card--loc">
+      <div class="cc-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+      </div>
+      <div class="cc-info">
+        <span class="cc-label">Ubicación</span>
+        <span class="cc-value">Calle ?, Dosquebradas</span>
+      </div>
+    </div>
+    <div class="contact-card contact-card--hrs">
+      <div class="cc-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </div>
+      <div class="cc-info">
+        <span class="cc-label">Horario</span>
+        <span class="cc-value">Lun – Sáb: 9:00 AM – 6:00 PM</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario mejorado -->
+  <div class="booking-wrapper reveal">
+    <div class="booking-form-box">
+      <div class="booking-form-header">
+        <h3>Solicitud de cita</h3>
+        <p>Completa el formulario y te contactamos para confirmar disponibilidad.</p>
+      </div>
+
+      <form id="bookingForm">
+
+        <!-- Paso 1: Datos personales -->
+        <div class="form-section">
+          <span class="form-section-title">Datos personales</span>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre completo <span class="req">*</span></label>
+              <input type="text" id="nombre" placeholder="Tu nombre" required>
+            </div>
+            <div class="form-group">
+              <label for="telefono">WhatsApp <span class="req">*</span></label>
+              <input type="tel" id="telefono" placeholder="+57 300 000 0000" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico <span class="optional">(opcional)</span></label>
+            <input type="email" id="email" placeholder="tucorreo@gmail.com">
+          </div>
+        </div>
+
+        <!-- Paso 2: Servicio -->
+        <div class="form-section">
+          <span class="form-section-title">Servicio deseado</span>
+          <div class="service-selector" id="serviceSelector">
+            <button type="button" class="svc-btn" data-svc="Semipermanente">Semipermanente</button>
+            <button type="button" class="svc-btn" data-svc="Uñas Acrílicas">Acrílicas</button>
+            <button type="button" class="svc-btn" data-svc="Nail Art">Nail Art</button>
+            <button type="button" class="svc-btn" data-svc="Manicure Spa">Manicure Spa</button>
+            <button type="button" class="svc-btn" data-svc="Gel Builder">Gel Builder</button>
+            <button type="button" class="svc-btn" data-svc="Retiro & Remoción">Retiro & Remoción</button>
+          </div>
+          <input type="hidden" id="servicioSeleccionado">
+          <p class="svc-error" id="svcError" style="display:none;">Por favor selecciona un servicio</p>
+        </div>
+
+        <!-- Paso 3: Fecha y hora -->
+        <div class="form-section">
+          <span class="form-section-title">Fecha y hora</span>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fecha">Fecha deseada <span class="req">*</span></label>
+              <input type="date" id="fecha" required>
+            </div>
+            <div class="form-group">
+              <label>Hora preferida <span class="req">*</span></label>
+              <div class="custom-select" id="horaSelect">
+                <div class="cs-trigger" data-placeholder="Selecciona...">Selecciona...</div>
+                <div class="cs-dropdown">
+                  <div class="cs-option" data-value="9:00 AM">9:00 AM</div>
+                  <div class="cs-option" data-value="10:00 AM">10:00 AM</div>
+                  <div class="cs-option" data-value="11:00 AM">11:00 AM</div>
+                  <div class="cs-option" data-value="12:00 PM">12:00 PM</div>
+                  <div class="cs-option" data-value="2:00 PM">2:00 PM</div>
+                  <div class="cs-option" data-value="3:00 PM">3:00 PM</div>
+                  <div class="cs-option" data-value="4:00 PM">4:00 PM</div>
+                  <div class="cs-option" data-value="5:00 PM">5:00 PM</div>
+                </div>
+                <input type="hidden" id="hora" required>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 4: Referencia de diseño -->
+        <div class="form-section">
+          <span class="form-section-title">Referencia de diseño <span class="optional">(opcional)</span></span>
+          <div class="form-group">
+            <label for="notas">Describe tu diseño o pega un link de referencia</label>
+            <textarea id="notas" placeholder="Ej: quiero flores pequeñas en tono nude con detalles en dorado..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>¿Cómo nos encontraste?</label>
+            <div class="custom-select" id="comoSelect">
+              <div class="cs-trigger" data-placeholder="Selecciona...">Selecciona...</div>
+              <div class="cs-dropdown">
+                <div class="cs-option" data-value="Instagram">Instagram</div>
+                <div class="cs-option" data-value="WhatsApp / recomendación">WhatsApp / recomendación</div>
+                <div class="cs-option" data-value="Google">Google</div>
+                <div class="cs-option" data-value="TikTok">TikTok</div>
+                <div class="cs-option" data-value="Otro">Otro</div>
+              </div>
+              <input type="hidden" id="como">
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="form-submit" id="submitBtn">
+          <span class="submit-text">Enviar solicitud de cita</span>
+          <span class="submit-spinner"><div class="spinner-ring"></div></span>
+        </button>
+
+      </form>
+
+      <!-- Éxito -->
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon-wrap">✦</div>
+        <h3>¡Solicitud enviada!</h3>
+        <p>Te escribiremos al WhatsApp en menos de <strong>1 hora</strong> para confirmar tu cita. ¡Gracias!</p>
+        <button class="btn-nueva-cita" onclick="resetForm()">Hacer otra solicitud</button>
+      </div>
+    </div>
+
+    <!-- Perks laterales -->
+    <div class="booking-perks-box">
+      <h4>¿Por qué elegirnos?</h4>
+      <div class="perk">
+        <div class="perk-icon">✦</div>
+        <div>
+          <strong>Confirmación rápida</strong>
+          <p>Respondemos en menos de 1 hora por WhatsApp.</p>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">◆</div>
+        <div>
+          <strong>Diseño personalizado</strong>
+          <p>Consulta sin costo adicional incluida en tu cita.</p>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">❋</div>
+        <div>
+          <strong>Garantía de 7 días</strong>
+          <p>Si algo falla, lo arreglamos sin costo extra.</p>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">○</div>
+        <div>
+          <strong>Productos premium</strong>
+          <p>Usamos marcas certificadas, seguras para tu uña natural.</p>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">▲</div>
+        <div>
+          <strong>Horarios flexibles</strong>
+          <p>Lunes a sábado de 9 AM a 6 PM.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="section-header reveal">
+    <span class="section-tag">Lo que dicen</span>
+    <h2 class="section-title">Nuestras <em>clientas</em></h2>
+  </div>
+  <div class="testimonios-grid">
+    <div class="testimonio reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonio-text">"Llevo más de un año viniendo y nunca me han fallado. El nail art que me hacen es increíble, siempre mejor de lo que imaginé."</p>
+      <div class="testimonio-author">
+        <div class="author-avatar av1">nc</div>
+        <div><div class="author-name">nombre cliente</div><div class="author-since">Clienta desde ?</div></div>
+      </div>
+    </div>
+    <div class="testimonio reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonio-text">"El ambiente es precioso, muy relajante. Me tratan súper bien y mis uñas siempre duran impecables. ¡100% recomendadas!"</p>
+      <div class="testimonio-author">
+        <div class="author-avatar av2">nc</div>
+        <div><div class="author-name">nombre cliente</div><div class="author-since">Clienta desde ?</div></div>
+      </div>
+    </div>
+    <div class="testimonio reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonio-text">"Me hicieron las uñas para mi boda y quedaron perfectas. Escucharon exactamente lo que quería. Sin duda el mejor studio de la ciudad."</p>
+      <div class="testimonio-author">
+        <div class="author-avatar av3">nc</div>
+        <div><div class="author-name">nombre cliente</div><div class="author-since">Clienta desde ?</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="nav-logo">Lz Glow <span>Nails</span></a>
+  <div class="footer-info">
+    <div>Calle ?, Dosquebradas, Risaralda</div>
+    <div>+57 321 587 9755 · ?@gmail.com</div>
+    <div>Lun – Sáb: 9:00 AM – 6:00 PM</div>
+  </div>
+  <div class="footer-social">
+    <a class="social-link" href="#" title="Instagram">Ig</a>
+    <a class="social-link" href="#" title="WhatsApp">Wa</a>
+    <a class="social-link" href="#" title="TikTok">Tt</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
