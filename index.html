@@ -283,6 +283,7 @@
   <div class="section-header reveal">
     <span class="section-tag">Nuestro trabajo</span>
     <h2 class="section-title">Galería <em></em></h2>
+    <p class="gallery-subtitle"></p>
   </div>
   <div class="gallery-filter reveal">
     <button class="filter-btn active" data-filter="all">Todo <span class="filter-count">20</span></button>
@@ -439,7 +440,7 @@
   <div class="contacto-header reveal">
     <span class="section-tag">Agenda tu visita</span>
     <h2 class="section-title">Reserva tu <em>cita</em></h2>
-    <p class="contacto-intro">Escríbenos directamente o llena el formulario — te confirmamos en menos de 1 hora.</p>
+    <p class="contacto-intro">Escríbenos directamente o llena el formulario — te confirmamos en menos de 2 horas.</p>
   </div>
 
   <!-- Tarjetas de contacto rápido -->
@@ -479,7 +480,7 @@
       </div>
       <div class="cc-info">
         <span class="cc-label">Ubicación</span>
-        <span class="cc-value">La capilla calle 65#19, Dosquebradas</span>
+        <span class="cc-value">La capilla calle 65 #19, Dosquebradas</span>
       </div>
     </div>
     </div>
@@ -627,7 +628,7 @@
               <div class="cs-dropdown">
                 <div class="cs-option" data-value="Instagram">Instagram</div>
                 <div class="cs-option" data-value="WhatsApp">WhatsApp</div>
-                <div class="cs-option" data-value="recomendacion">Recomendación</div>
+                <div class="cs-option" data-value="Recomendacion">Recomendacion</div>
                 <div class="cs-option" data-value="TikTok">TikTok</div>
                 <div class="cs-option" data-value="Otro">Otro</div>
               </div>
@@ -694,10 +695,15 @@
 <footer>
   <a href="#" class="nav-logo">Liz Glow <span>Nails</span></a>
   <div class="footer-info">
-    <div>Hecho con ❤️ por lizglownails</div>
-    <div>lizglownails@gmail.com</div>
-    <div>© 2026 Liz Glow Nails. Todos los derechos reservados.</div>
+    <div>Hecho con ❤️ por Liz Gomez</div>
+    <div>© 2026 Liz Glow Nails. Todos los derechos reservados</div>
   </div>
+  <div class="footer-social">
+    <a class="social-link" href="#" title="Instagram">Ig</a>
+    <a class="social-link" href="#" title="WhatsApp">Wa</a>
+    <a class="social-link" href="#" title="TikTok">Tt</a>
+  </div>
+</footer>
 
 <!-- DECORACIONES FLOTANTES -->
 <div class="floating-deco" id="floatingDeco">
@@ -709,15 +715,15 @@
 </div>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <div class="lightbox-inner">
-    <button class="lightbox-close" id="lbClose">✕ Cerrar</button>
-    <button class="lightbox-nav lightbox-prev" id="lbPrev">‹</button>
-    <button class="lightbox-nav lightbox-next" id="lbNext">›</button>
-    <img src="" alt="" id="lbImg">
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Vista de imagen">
+  <button id="lbClose" aria-label="Cerrar">✕ Cerrar</button>
+  <button id="lbPrev" aria-label="Anterior">‹</button>
+  <button id="lbNext" aria-label="Siguiente">›</button>
+  <div id="lbContent">
+    <img id="lbImg" src="" alt="">
     <video id="lbVideo" controls playsinline></video>
-    <div class="lightbox-caption" id="lbCaption"></div>
   </div>
+  <div id="lbCaption"></div>
 </div>
 
 <script src="script.js"></script>
