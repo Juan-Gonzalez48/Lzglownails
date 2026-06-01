@@ -1526,3 +1526,407 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 
 })();
+
+// ══════════════════════════════════
+// GALERÍA — FILTROS + LIGHTBOX
+// ══════════════════════════════════
+(function () {
+  'use strict';
+
+  // ── Actualizar contadores automáticamente ──
+  function updateCounts() {
+    const categories = ['press-on', 'semi', 'dipping', 'caballero', 'pedicure', 'limpieza'];
+    let total = 0;
+    categories.forEach(cat => {
+      const n = document.querySelectorAll(`.g-item[data-cat="${cat}"]`).length;
+      total += n;
+      const el = document.getElementById(`count-${cat}`);
+      if (el) el.textContent = n;
+    });
+    const allEl = document.getElementById('count-all');
+    if (allEl) allEl.textContent = total;
+  }
+  updateCounts();
+
+  // ── Filtros ──
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      let delay = 0;
+      document.querySelectorAll('#galleryGrid .g-item').forEach(item => {
+        const match = filter === 'all' || item.dataset.cat === filter;
+        if (match) {
+          item.classList.remove('hidden', 'fade-in');
+          void item.offsetWidth; // reflow para reiniciar animación
+          item.classList.add('fade-in');
+          item.style.animationDelay = (delay * 0.04) + 's';
+          delay++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // ── Lightbox ──
+  const lb      = document.getElementById('lightbox');
+  const lbImg   = document.getElementById('lbImg');
+  const lbVideo = document.getElementById('lbVideo');
+  const lbCap   = document.getElementById('lbCaption');
+  const lbClose = document.getElementById('lbClose');
+  const lbPrev  = document.getElementById('lbPrev');
+  const lbNext  = document.getElementById('lbNext');
+  if (!lb || !lbImg) return;
+
+  let items = [];
+  let cur   = 0;
+
+  function openLB(allItems, idx) {
+    items = allItems;
+    cur   = idx;
+    lb.classList.add('lb-open');
+    showItem(cur);
+  }
+
+  function closeLB() {
+    lb.classList.remove('lb-open');
+    if (lbVideo) {
+      lbVideo.pause();
+      lbVideo.removeAttribute('src');
+      lbVideo.classList.remove('lb-show');
+    }
+    lbImg.classList.remove('lb-hidden');
+  }
+
+  function showItem(idx) {
+    const item  = items[idx];
+    if (!item) return;
+    const video = item.querySelector('video');
+    const img   = item.querySelector('img');
+    const label = item.querySelector('.g-label');
+
+    if (video && video.src) {
+      lbImg.classList.add('lb-hidden');
+      if (lbVideo) {
+        lbVideo.classList.add('lb-show');
+        lbVideo.src = video.src;
+        lbVideo.load();
+        lbVideo.play().catch(() => {});
+      }
+    } else {
+      if (lbVideo) { lbVideo.pause(); lbVideo.classList.remove('lb-show'); }
+      lbImg.classList.remove('lb-hidden');
+      if (img) { lbImg.src = img.src; lbImg.alt = img.alt || ''; }
+    }
+    if (lbCap) lbCap.textContent = label ? label.textContent.trim() : '';
+    if (lbPrev) lbPrev.style.display = items.length > 1 ? 'flex' : 'none';
+    if (lbNext) lbNext.style.display = items.length > 1 ? 'flex' : 'none';
+  }
+
+  if (lbClose) lbClose.addEventListener('click', closeLB);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+
+  if (lbPrev) lbPrev.addEventListener('click', e => {
+    e.stopPropagation();
+    cur = (cur - 1 + items.length) % items.length;
+    showItem(cur);
+  });
+  if (lbNext) lbNext.addEventListener('click', e => {
+    e.stopPropagation();
+    cur = (cur + 1) % items.length;
+    showItem(cur);
+  });
+
+  // Teclado
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('lb-open')) return;
+    if (e.key === 'Escape')      closeLB();
+    if (e.key === 'ArrowLeft')  { cur = (cur - 1 + items.length) % items.length; showItem(cur); }
+    if (e.key === 'ArrowRight') { cur = (cur + 1) % items.length; showItem(cur); }
+  });
+
+  // Swipe móvil
+  let tX = 0;
+  lb.addEventListener('touchstart', e => { tX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    const diff = tX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 45) {
+      cur = diff > 0 ? (cur + 1) % items.length : (cur - 1 + items.length) % items.length;
+      showItem(cur);
+    }
+  }, { passive: true });
+
+  // Click en galería
+  const grid = document.getElementById('galleryGrid');
+  if (grid) {
+    grid.addEventListener('click', e => {
+      const item = e.target.closest('.g-item');
+      if (!item || item.classList.contains('hidden')) return;
+      const visible = [...grid.querySelectorAll('.g-item:not(.hidden)')];
+      const idx = visible.indexOf(item);
+      if (idx >= 0) openLB(visible, idx);
+    });
+  }
+
+  // Video hover en galería
+  document.querySelectorAll('.g-video-item').forEach(item => {
+    const v = item.querySelector('video');
+    if (!v) return;
+    item.addEventListener('mouseenter', () => v.play().catch(() => {}));
+    item.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) v.play().catch(() => {});
+        else { v.pause(); v.currentTime = 0; }
+      });
+    }, { threshold: 0.5 });
+    obs.observe(item);
+  });
+
+})();
+
+/* ==========================================================================
+   LÓGICA DE FILTRADO PARA LA NUEVA GALERÍA (FOTOS Y VIDEO)
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Quitar la clase activa de todos los botones y ponérsela al que hundiste
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const targetFilter = button.getAttribute('data-filter');
+
+            galleryItems.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                
+                // Si hundiste "all" (Todo), muestra todo. Si no, compara categorías.
+                if (targetFilter === 'all' || targetFilter === itemCategory) {
+                    item.style.display = 'block';
+                    
+                    // Si es el video y está visible, podemos darle play o manejarlo
+                    const video = item.querySelector('video');
+                    if (video && targetFilter === 'all') {
+                        video.pause(); // Que no se reproduzca solo en el "Todo"
+                    }
+                } else {
+                    item.style.display = 'none';
+                    
+                    // Si escondemos el video, nos aseguramos de pausarlo
+                    const video = item.querySelector('video');
+                    if (video) video.pause();
+                }
+            });
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    // Elementos del Visor (Lightbox)
+    const lightbox = document.getElementById('galleryLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxVideo = document.getElementById('lightboxVideo');
+    const lightboxClose = document.querySelector('.lightbox-close');
+
+    // 1. FILTRADO DE CATEGORÍAS
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const targetFilter = button.getAttribute('data-filter');
+
+            galleryItems.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                if (targetFilter === 'all' || targetFilter === itemCategory) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                    // Pausar video si se oculta la categoría
+                    const v = item.querySelector('video');
+                    if(v) v.pause();
+                }
+            });
+        });
+    });
+
+    // 2. ABRIR VISOR EN PANTALLA COMPLETA
+    galleryItems.forEach(item => {
+        const card = item.querySelector('.gallery-card');
+        
+        if (card) {
+            card.addEventListener('click', (e) => {
+                // Evitamos conflictos visuales
+                lightboxImg.style.display = 'none';
+                lightboxVideo.style.display = 'none';
+                lightboxVideo.pause();
+
+                const img = card.querySelector('img');
+                const video = card.querySelector('video');
+
+                if (img) {
+                    // Si es una foto, copiamos la ruta al visor de fotos
+                    lightboxImg.src = img.src;
+                    lightboxImg.style.display = 'block';
+                } else if (video) {
+                    // Si es el video, copiamos la ruta al visor de videos
+                    lightboxVideo.src = video.src;
+                    lightboxVideo.style.display = 'block';
+                    lightboxVideo.play(); // Arranca automáticamente en grande
+                }
+
+                // Mostrar el visor con animación
+                lightbox.classList.add('show');
+            });
+        }
+    });
+
+    // 3. CERRAR VISOR (Al darle a la X o al fondo negro)
+    if (lightboxClose && lightbox) {
+        lightboxClose.addEventListener('click', cerrarVisor);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) cerrarVisor();
+        });
+    }
+
+    function cerrarVisor() {
+        lightbox.classList.remove('show');
+        lightboxVideo.pause();
+        lightboxVideo.src = ""; // Limpiar video
+        lightboxImg.src = "";   // Limpiar foto
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    // Elementos del Visor (Lightbox)
+    const lightbox = document.getElementById('galleryLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxVideo = document.getElementById('lightboxVideo');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    let elementosActivos = []; // Lista de fotos/videos que se pueden ver según el filtro
+    let currentIndex = 0;      // En qué foto está parado el usuario actualmente
+
+    // 1. FILTRADO DE CATEGORÍAS
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const targetFilter = button.getAttribute('data-filter');
+
+            galleryItems.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                if (targetFilter === 'all' || targetFilter === itemCategory) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                    const v = item.querySelector('video');
+                    if(v) v.pause();
+                }
+            });
+            
+            actualizarElementosActivos();
+        });
+    });
+
+    // Función para saber qué fotos están visibles en la pantalla en este momento
+    function actualizarElementosActivos() {
+        elementosActivos = Array.from(galleryItems).filter(item => item.style.display !== 'none');
+    }
+
+    // Ejecutar una vez al cargar para tener la lista inicial
+    actualizarElementosActivos();
+
+    // 2. ABRIR VISOR AL DAR CLIC
+    galleryItems.forEach(item => {
+        const card = item.querySelector('.gallery-card');
+        
+        if (card) {
+            card.addEventListener('click', () => {
+                // Saber en qué posición de la lista está el elemento cliqueado
+                currentIndex = elementosActivos.indexOf(item);
+                mostrarContenido(item);
+                lightbox.classList.add('show');
+            });
+        }
+    });
+
+    // Función clave para renderizar la foto o el video actual
+    function mostrarContenido(item) {
+        lightboxImg.style.display = 'none';
+        lightboxVideo.style.display = 'none';
+        lightboxVideo.pause();
+
+        const card = item.querySelector('.gallery-card');
+        const img = card.querySelector('img');
+        const video = card.querySelector('video');
+
+        if (img) {
+            lightboxImg.src = img.src;
+            lightboxImg.style.display = 'block';
+        } else if (video) {
+            lightboxVideo.src = video.src;
+            lightboxVideo.style.display = 'block';
+            lightboxVideo.play();
+        }
+    }
+
+    // 3. NAVEGACIÓN (Siguiente y Anterior)
+    function cambiarElemento(direccion) {
+        if (elementosActivos.length <= 1) return; // Si solo hay una foto, no hace nada
+
+        if (direccion === 'next') {
+            currentIndex = (currentIndex + 1) % elementosActivos.length; // Si llega al final, vuelve al inicio
+        } else if (direccion === 'prev') {
+            currentIndex = (currentIndex - 1 + elementosActivos.length) % elementosActivos.length; // Si va hacia atrás del inicio, va al final
+        }
+
+        mostrarContenido(elementosActivos[currentIndex]);
+    }
+
+    // Eventos para los clics en los botones de las flechas
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); cambiarElemento('next'); });
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); cambiarElemento('prev'); });
+
+    // 4. CERRAR VISOR
+    if (lightboxClose && lightbox) {
+        lightboxClose.addEventListener('click', cerrarVisor);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) cerrarVisor();
+        });
+    }
+
+    function cerrarVisor() {
+        lightbox.classList.remove('show');
+        lightboxVideo.pause();
+        lightboxVideo.src = "";
+        lightboxImg.src = "";
+    }
+
+    // 5. SOPORTE PARA TECLADO (Flechas del computador y Escape para salir)
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('show')) return;
+
+        if (e.key === 'ArrowRight') {
+            cambiarElemento('next');
+        } else if (e.key === 'ArrowLeft') {
+            cambiarElemento('prev');
+        } else if (e.key === 'Escape') {
+            cerrarVisor();
+        }
+    });
+});
